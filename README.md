@@ -7,68 +7,62 @@
 
 ## Descripción
 
-Esta es una API RESTful desarrollada con **FastAPI** (Python) y **MySQL** que gestiona un catálogo de contenedores. El objetivo principal es proporcionar una interfaz robusta y eficiente para realizar operaciones **CRUD** (Crear, Leer, Actualizar, Eliminar) sobre los registros de contenedores, siguiendo los principios de diseño **SOLID** y **KISS**, y adoptando una estructura modular que emula el patrón **MVC** para APIs.
+Esta es una **API RESTful** desarrollada con **FastAPI** (Python) y **MySQL**, diseñada para gestionar un **catálogo de contenedores marítimos**. Su objetivo principal es proporcionar una interfaz eficiente para realizar operaciones **CRUD** (Crear, Leer, Actualizar, Eliminar) sobre los registros de contenedores.
 
-Este proyecto ha sido desarrollado demostrando habilidades en el desarrollo de APIs, gestión de bases de datos y adherencia a buenas prácticas de ingeniería de software.
+El proyecto está diseñado siguiendo rigurosamente los principios de **SOLID** y **KISS**, adoptando una estructura modular que emula el patrón **MVC (Modelo-Vista-Controlador)** adaptado para el desarrollo de APIs.
+
+Este desarrollo demuestra habilidades en:
+* Diseño y construcción de APIs RESTful.
+* Interacción y gestión de bases de datos relacionales.
+* Adherencia a buenas prácticas de ingeniería de software para código limpio y mantenible.
+* Uso de **inyección de dependencias** y **pools de conexiones** para optimización de recursos.
 
 ## Características
 
-* **API RESTful Completa:** Endpoints para Listar, Consultar por ID, Crear, Actualizar y Eliminar contenedores.
-* **Validación de Datos:** Uso de Pydantic para una validación de esquemas robusta y automática.
-* **Documentación Interactiva:** Generación automática de Swagger UI y ReDoc para una fácil exploración y prueba de la API.
-* **Configuración Flexible:** Uso de variables de entorno (`.env`) para la configuración de la base de datos.
-* **MySQL como Base de Datos:** Persistencia de datos en una base de datos relacional robusta.
-* **Principios de Diseño:** Implementado con un enfoque en **SOLID** y **KISS** para un código limpio, mantenible y escalable.
+* **API RESTful Completa:** Endpoints dedicados para las operaciones fundamentales de Listado, Consulta por ID, Creación, Actualización y Eliminación de contenedores.
+* **Validación de Datos Sólida:** Integración profunda con **Pydantic** para una validación de esquemas de datos robusta, garantizando la integridad de las entradas y salidas JSON.
+* **Documentación Interactiva Automática:** Generación instantánea de interfaces de documentación como **Swagger UI** (`/docs`) y **ReDoc** (`/redoc`), facilitando la exploración y prueba de la API.
+* **Configuración Flexible y Segura:** Gestión de credenciales y parámetros de configuración a través de **variables de entorno (`.env`)** mediante `pydantic-settings`, promoviendo la seguridad y la portabilidad.
+* **Persistencia con MySQL:** Utiliza **MySQL 8.x** como base de datos relacional para una gestión de datos fiable y escalable.
+* **Pool de Conexiones a Base de Datos:** Implementa un pool de conexiones (`mysql.connector.pooling`) para optimizar el rendimiento y la gestión de recursos de la base de datos.
+* **Principios de Diseño Aplicados:** Construido bajo los principios **SOLID** y **KISS** para asegurar un código modular, mantenible, extensible y fácil de entender.
+* **Automatización de Base de Datos:** Incluye un script dedicado para la **inicialización y verificación** automática de la base de datos y la tabla necesaria.
 
 ## Requisitos
 
-* Python 3.x
-* MySQL 8.x
-* `pip` (gestor de paquetes de Python)
-* Un entorno virtual de Python
+* **Python 3.x** 
+* **MySQL Server 8.x**
+* **`pip`** 
+* **Entorno virtual de Python** 
 
 ## Instalación y Ejecución
 
-1.  **Clonar el repositorio:**
+Sigue estos pasos para poner en marcha la API en tu entorno local:
+
+1.  **Clonar el Repositorio:**
     ```bash
     git clone [https://github.com/tu-usuario/container_catalog_api.git](https://github.com/tu-usuario/container_catalog_api.git)
     cd container_catalog_api
     ```
 
-2.  **Crear y activar un entorno virtual:**
+2.  **Crear y Activar un Entorno Virtual:**
     ```bash
     python -m venv venv
-    # En Windows
+    # En Windows (Command Prompt/PowerShell):
     .\venv\Scripts\activate
-    # En Linux/macOS
+
+    # En Linux/macOS (o Git Bash en Windows):
     source venv/bin/activate
     ```
 
-3.  **Instalar dependencias:**
+3.  **Instalar Dependencias:**
     ```bash
     pip install -r requirements.txt
     ```
 
-4.  **Configurar la base de datos:**
-    * Crea una base de datos MySQL llamada `container_catalog`.
-    * Ejecuta el siguiente script SQL para crear la tabla `containers`:
-        ```sql
-        USE container_catalog;
-
-        CREATE TABLE IF NOT EXISTS containers (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            code VARCHAR(255) UNIQUE NOT NULL,
-            type VARCHAR(255) NOT NULL,
-            status VARCHAR(255) NOT NULL,
-            current_location VARCHAR(255) NOT NULL,
-            owner VARCHAR(255) NOT NULL,
-            last_updated DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-        );
-        ```
-
-5.  **Configurar variables de entorno:**
-    * Crea un archivo `.env` en la raíz del proyecto, basándote en `.env.example`.
-    * Asegúrate de reemplazar los valores de las credenciales de MySQL con los tuyos:
+4.  **Configurar Variables de Entorno:**
+    * Crea un archivo llamado `.env` en la raíz del proyecto, basándote en el archivo de ejemplo `.env.example`.
+    * Reemplaza los valores de las credenciales de MySQL con los tuyos. Estos deben ser credenciales con permisos para crear bases de datos y tablas.
         ```dotenv
         # .env
         MYSQL_HOST=localhost
@@ -78,38 +72,49 @@ Este proyecto ha sido desarrollado demostrando habilidades en el desarrollo de A
         MYSQL_DATABASE=container_catalog
         ```
 
-6.  **Ejecutar la aplicación:**
+5.  **Inicializar la Base de Datos:**
+    * Este script creará la base de datos `container_catalog` y la tabla `containers` si no existen.
+    ```bash
+    python src/database_initializer.py
+    ```
+
+6.  **Ejecutar la Aplicación FastAPI:**
     ```bash
     uvicorn src.main:app --reload --host 0.0.0.0 --port 8000
     ```
-    La API estará disponible en `http://localhost:8000`.
+    La API estará operativa y accesible en `http://localhost:8000`.
 
 ## Endpoints de la API
 
-Una vez la API esté corriendo, puedes acceder a la documentación interactiva en:
+Una vez que la API esté en ejecución, podrás acceder a la documentación interactiva y probar los endpoints:
+
 * **Swagger UI:** `http://localhost:8000/docs`
 * **ReDoc:** `http://localhost:8000/redoc`
 
-Los endpoints principales incluyen:
+Los endpoints principales disponibles son:
 
-* `GET /api/v1/containers/`: Listar todos los contenedores.
-* `GET /api/v1/containers/{container_id}`: Consultar un contenedor por ID.
-* `POST /api/v1/containers/`: Crear un nuevo contenedor.
-* `PUT /api/v1/containers/{container_id}`: Actualizar un contenedor existente.
-* `DELETE /api/v1/containers/{container_id}`: Eliminar un contenedor.
+* `GET /api/v1/containers/`: **Listar todos los contenedores**.
+* `GET /api/v1/containers/{container_id}`: **Consultar un contenedor específico** por su identificador único.
+* `POST /api/v1/containers/`: **Crear un nuevo registro de contenedor**.
+* `PUT /api/v1/containers/{container_id}`: **Actualizar los detalles** de un contenedor existente.
+* `DELETE /api/v1/containers/{container_id}`: **Eliminar un contenedor** del catálogo.
 
 ## Estructura del Proyecto
+
 ├── src/
-│   ├── main.py                     # Aplicación FastAPI principal
-│   ├── database.py                 # Configuración de la conexión a la base de datos
-│   ├── models/                     # Esquemas Pydantic y modelos de datos
-│   │   ├── container.py
-│   ├── services/                   # Lógica de negocio y abstracción de la base de datos
-│   │   ├── container_service.py
-│   └── api/                        # Controladores/Rutas de la API
-│       ├── v1/
-│           └── endpoints/
+│   ├── main.py                     # Archivo principal de la aplicación FastAPI.
+│   ├── database.py                 # Configuración del pool de conexiones a la base de datos MySQL.
+│   ├── database_initializer.py     # Script para crear/verificar la base de datos y la tabla.
+│   ├── models/                     # Definiciones de esquemas de datos Pydantic para la API.
+│   │   ├── init.py
+│   │   └── container.py
+│   ├── services/                   # Lógica y capa de abstracción para la interacción con la base de datos.
+│   │   ├── init.py
+│   │   └── container_service.py
+│   └── api/                        # Módulos que contienen los controladores/rutas de la API.
+│       ├── v1/                     # Versionado de la API.
+│           └── endpoints/          # Definición de los endpoints.
 │               └── containers.py
-├── .env.example                    # Ejemplo de variables de entorno
-├── .env                            # Variables de entorno (con tus credenciales)
-└── requirements.txt                # Dependencias del proyecto
+├── .env.example                    # Ejemplo de configuración de variables de entorno.
+├── .env                            # Archivo con las variables de entorno de tu configuración local.
+└── requirements.txt                # Lista de dependencias del proyecto.
