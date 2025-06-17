@@ -35,18 +35,14 @@ try:
     print("Pool de conexiones a MySQL inicializado exitosamente.")
 except mysql.connector.Error as err:
     print(f"Error al inicializar el pool de conexiones: {err}")
-    print("Asegúrate de que MySQL esté corriendo y las credenciales en .env sean correctas.")
+    print("Asegúrate de que MySQL esté corriendo y las credenciales sean correctas.")
     exit(1) 
 
 def get_db_connection():
-    """
-    Obtiene una conexión a la base de datos desde el pool.
-    Esta función se usará en la inyección de dependencias de FastAPI.
-    """
     conn = None
     try:
         conn = db_connection_pool.get_connection()
-        yield conn # permite que FastAPI inyecte la conexión y la cierre automáticamente
+        yield conn
     except mysql.connector.Error as err:
         print(f"Error al obtener conexión del pool: {err}")
         raise
