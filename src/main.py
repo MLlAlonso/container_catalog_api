@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from src.api.v1.endpoints import containers
 
 # Inicialización de la aplicación FastAPI
@@ -12,7 +13,6 @@ app = FastAPI(
 )
 
 # --- Configuración CORS ---
-# Orígenes permitidos (para desarrollo y luego para producción)
 origins = [
     "http://localhost",
     "http://localhost:8000",
@@ -28,8 +28,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.mount("/static", StaticFiles(directory="public"), name="static")
 app.include_router(containers.router, prefix="/api/v1")
 
-@app.get("/", tags=["Root"], summary="Punto de entrada de la API", description="Mensaje de bienvenida y estado de la API.")
-async def read_root():
-    return {"message": "Bienvenido a la API del Catálogo de Contenedores!"}
+from fastapi.responses import FileResponse
+
+@app.get("/", include_in_schema=False)
+async def read_index():
+    return FileResponse("public/index.html")

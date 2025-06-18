@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=DM+Sans:300,400,500,700,900&display=swap');
+
+$primary-color: #ED6445;
+$secondary-color: #6c757d;
+$success-color: #ED6445;
+$danger-color: #C2C6CA;
+$dark-text: #191919;
+$border-color: #dee2e6;
+$warning-color: #ffc107;
+
+
+
+$light-bg: #F5F9FC;
+$btn-color:#B59630;
+$btn-hover-color: #000000;
+
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// Base
+body {
+    
+    font-family: 'DM Sans', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: $light-bg;
+    color: $dark-text;
+    line-height: 1.6;
+}

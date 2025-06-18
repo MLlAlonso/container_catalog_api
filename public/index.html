@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Contenedores</title>
+    <link rel="stylesheet" href="/static/src/styles/index.css">
+    <link rel="icon" href="/public/src/img/logoMLA (1).png"/>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__container">
+            <h1 class="header__title">Catálogo de Contenedores</h1>
+            <nav class="header__nav">
+                <button id="showAddFormBtn" class="button button--primary">Añadir Contenedor</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="section">
+            <h2 class="section__title">Listado de Contenedores</h2>
+
+            <div class="search-bar-container">
+                <input type="text" id="searchInput" class="form__input search-bar__input" placeholder="Buscar por código, tipo, propietario...">
+                <button id="searchBtn" class="button button--secondary search-bar__button">Buscar</button>
+            </div>
+            
+            <div id="containerList" class="container-list">
+                <p>Cargando contenedores...</p>
+            </div>
+            
+            <p id="noResultsMessage" style="display: none; text-align: center; color: #6c757d;">No hay contenedores que coincidan con tu búsqueda.</p>
+        </section>
+
+        <section id="addEditSection" class="section add-edit-section" style="display: none;">
+            <h2 id="formTitle" class="section__title">Añadir Nuevo Contenedor</h2>
+
+            <form id="containerForm" class="form">
+
+                <div class="form__group">
+                    <label for="code" class="form__label">Código:</label>
+                    <input type="text" id="code" name="code" class="form__input" required>
+                    <p class="form__error-message" id="codeError"></p> 
+                </div>
+
+                <div class="form__group">
+                    <label for="type" class="form__label">Tipo:</label>
+                    <input type="text" id="type" name="type" class="form__input" required>
+                    <p class="form__error-message" id="typeError"></p> 
+                </div>
+
+                <div class="form__group">
+                    <label for="status" class="form__label">Estado:</label>
+                    <input type="text" id="status" name="status" class="form__input" required>
+                    <p class="form__error-message" id="statusError"></p> 
+                </div>
+
+                <div class="form__group">
+                    <label for="currentLocation" class="form__label">Ubicación Actual:</label>
+                    <input type="text" id="currentLocation" name="currentLocation" class="form__input" required>
+                    <p class="form__error-message" id="currentLocationError"></p> 
+                </div>
+
+                <div class="form__group">
+                    <label for="owner" class="form__label">Propietario:</label>
+                    <input type="text" id="owner" name="owner" class="form__input" required>
+                    <p class="form__error-message" id="ownerError"></p> 
+                </div>
+
+                <input type="hidden" id="containerId" name="id">
+                <div class="form__actions">
+                    <button type="submit" class="button button--success">Guardar Contenedor</button>
+                    <button type="button" id="cancelFormBtn" class="button button--danger">Cancelar</button>
+                </div>
+                
+            </form>
+        </section>
+
+        <div id="detailsModal" class="modal" style="display: none;">
+            <div class="modal__content">
+                <span class="modal__close-button">&times;</span>
+                <h3 class="modal__title">Detalles del Contenedor</h3>
+                <div id="modalDetails" class="modal__body"> </div>
+            </div>
+        </div>
+
+        <div id="confirmModal" class="modal confirm-modal" style="display: none;">
+            <div class="modal__content">
+                <h3 class="modal__title" id="confirmModalTitle">Confirmar Acción</h3>
+                <p class="modal__message" id="confirmModalMessage">¿Estás seguro de que quieres realizar esta acción?</p>
+                <div class="modal__actions">
+                    <button id="confirmYesBtn" class="button button--success">Sí</button>
+                    <button id="confirmNoBtn" class="button button--danger">No</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <p>&copy; 2025 Catálogo de Contenedores. <br> 
+                Desarrollado por <a href="https://mllalonso.github.io/landing-pages-suite/" target="_blank">Mikkel Llaven Alonso</a>.
+            </p>
+        </div>
+    </footer>
+
+    <script src="/static/src/js/main.js"></script>
+</body>
+</html>
