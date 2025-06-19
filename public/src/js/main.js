@@ -407,7 +407,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Event listeners para los botones del modal de confirmación
     confirmYesBtn.addEventListener('click', () => {
         if (confirmActionCallback) {
             confirmActionCallback();

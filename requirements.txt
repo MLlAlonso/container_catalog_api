@@ -1,5 +1,6 @@
 fastapi
 uvicorn[standard]
 mysql-connector-python
-pydantic-settings 
+pydantic-settings
 python-multipart
+gunicorn

@@ -1,0 +1,29 @@
+services:
+  # --- Servicio para la API (Backend FastAPI) ---
+  - type: web
+    name: container-api
+    env: python
+    rootDir: ./
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn src.main:app -w 4 -k uvicorn.workers.UvicornWorker --timeout 120 --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.12 
+      - key: MYSQL_HOST
+        sync: false 
+      - key: MYSQL_PORT
+        sync: false
+      - key: MYSQL_USER
+        sync: false
+      - key: MYSQL_PASSWORD
+        sync: false
+      - key: MYSQL_DATABASE
+        sync: false
+
+  # --- Servicio para el Frontend (Archivos Estáticos) ---
+  - type: static
+    name: container-frontend
+
+    rootDir: ./public
+    buildCommand: npm install -g sass && sass src/styles/index.scss:src/styles/index.css
+    publishDir: ./public
