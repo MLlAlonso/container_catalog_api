@@ -8,7 +8,7 @@ services:
     startCommand: gunicorn src.main:app -w 4 -k uvicorn.workers.UvicornWorker --timeout 120 --bind 0.0.0.0:$PORT
     envVars:
       - key: PYTHON_VERSION
-        value: 3.10.12 
+        value: 3.10.12
       - key: MYSQL_HOST
         sync: false 
       - key: MYSQL_PORT
@@ -19,11 +19,12 @@ services:
         sync: false
       - key: MYSQL_DATABASE
         sync: false
+      - key: FRONTEND_URL
+        sync: false 
 
   # --- Servicio para el Frontend (Archivos Estáticos) ---
-  - type: static
+  - type: static_site
     name: container-frontend
-
     rootDir: ./public
     buildCommand: npm install -g sass && sass src/styles/index.scss:src/styles/index.css
     publishDir: ./public
