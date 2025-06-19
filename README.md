@@ -128,6 +128,7 @@ Los endpoints principales disponibles son:
 
 ## Estructura del Proyecto
 
+```dotenv
 ── src/
 │   ├── main.py                     # Archivo principal de la aplicación FastAPI y servidor de archivos estáticos.
 │   ├── database.py                 # Configuración del pool de conexiones a la base de datos.
@@ -155,3 +156,4 @@ Los endpoints principales disponibles son:
 ├── .env.example                    # Ejemplo de configuración de variables de entorno.
 ├── .env                            # Archivo con las variables de entorno de tu configuración local.
 └── requirements.txt                # Lista de dependencias de Python del proyecto.
+```
