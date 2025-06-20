@@ -26,7 +26,7 @@ origins.extend(frontend_url)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[str(origin).strip() for origin in origins], # Asegúrate de limpiar espacios
+    allow_origins=[str(origin).strip() for origin in origins], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
