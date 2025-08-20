@@ -157,3 +157,6 @@ Los endpoints principales disponibles son:
 ├── .env                            # Archivo con las variables de entorno de tu configuración local.
 └── requirements.txt                # Lista de dependencias de Python del proyecto.
 ```
+📌 **Desarrollado por Mikkel Llaven Alonso**  
+✉️ [mikkel_03@outlook.com](mailto:mikkel_03@outlook.com)  
+💼 [LinkedIn](https://www.linkedin.com/in/mikkel-llaven-alonso-5893b4280/)
